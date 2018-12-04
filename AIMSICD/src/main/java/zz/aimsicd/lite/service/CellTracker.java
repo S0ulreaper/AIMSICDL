@@ -960,6 +960,7 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
         } else if (mChangedLAC) {
             getApplication().setCurrentStatus(Status.MEDIUM, mVibrateEnabled, mVibrateMinThreatLevel);
             contentText = context.getString(R.string.hostile_service_area_changing_lac_detected);
+                Toast.makeText(MainActivity.this, "LAC changed", Toast.LENGTH_SHORT).show();
         } else if (mCellIdNotInOpenDb) {
             getApplication().setCurrentStatus(Status.MEDIUM, mVibrateEnabled, mVibrateMinThreatLevel);
             contentText = context.getString(R.string.cell_id_doesnt_exist_in_db);
