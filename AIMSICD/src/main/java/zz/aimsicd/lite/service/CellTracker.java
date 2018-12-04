@@ -26,6 +26,7 @@ import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
+import android.widget.Toast;
 
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -960,6 +961,7 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
         } else if (mChangedLAC) {
             getApplication().setCurrentStatus(Status.MEDIUM, mVibrateEnabled, mVibrateMinThreatLevel);
             contentText = context.getString(R.string.hostile_service_area_changing_lac_detected);
+            Toast.makeText(MainActivity.this, "LAC Changed", Toast.LENGTH_SHORT).show();
         } else if (mCellIdNotInOpenDb) {
             getApplication().setCurrentStatus(Status.MEDIUM, mVibrateEnabled, mVibrateMinThreatLevel);
             contentText = context.getString(R.string.cell_id_doesnt_exist_in_db);
