@@ -952,28 +952,37 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
      *
      */
     private void setNotification() {
+        system.out.println("print 1");
         String tickerText;
         String contentText = "Phone Type " + mDevice.getPhoneType();
 
         if (mTypeZeroSmsDetected) {
+            system.out.println("print 2");
             getApplication().setCurrentStatus(Status.DANGER, mVibrateEnabled, mVibrateMinThreatLevel);
         } else if (mChangedLAC) {
+            system.out.println("print 3");
             getApplication().setCurrentStatus(Status.MEDIUM, mVibrateEnabled, mVibrateMinThreatLevel);
             contentText = context.getString(R.string.hostile_service_area_changing_lac_detected);
         } else if (mCellIdNotInOpenDb) {
+            system.out.println("print 4");
             getApplication().setCurrentStatus(Status.MEDIUM, mVibrateEnabled, mVibrateMinThreatLevel);
             contentText = context.getString(R.string.cell_id_doesnt_exist_in_db);
         } else if (mTrackingCell || mMonitoringCell) {
+            system.out.println("print 5");
             getApplication().setCurrentStatus(Status.OK, mVibrateEnabled, mVibrateMinThreatLevel);
             if (mTrackingCell) {
+                system.out.println("print 6");
                 contentText = context.getString(R.string.cell_tracking_active);
             } 
             if (mMonitoringCell) {
+                system.out.println("print 7");
                 contentText = context.getString(R.string.cell_monitoring_active);
             } else {
+                system.out.println("print 8");
                 getApplication().setCurrentStatus(Status.IDLE, mVibrateEnabled, mVibrateMinThreatLevel);
             }
         } else {
+            system.out.println("print 9");
             getApplication().setCurrentStatus(Status.IDLE, mVibrateEnabled, mVibrateMinThreatLevel);
         }
 
@@ -981,19 +990,23 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
             Status status = getApplication().getStatus();
             switch (status) {
                 case IDLE: // GRAY
+                    system.out.println("print 10");
                     contentText = context.getString(R.string.phone_type) + mDevice.getPhoneType();
                     tickerText = context.getResources().getString(R.string.app_name_short) + " " + context.getString(R.string.status_idle_description);
                     break;
 
                 case OK: // GREEN
+                    system.out.println("print 11");
                     tickerText = context.getResources().getString(R.string.app_name_short) + " " + context.getString(R.string.status_ok_description);
                     break;
 
                 case MEDIUM: // YELLOW
+                    system.out.println("print 12");
                     // Initialize tickerText as the app name string
                     // See multiple detection comments above.
                     tickerText = context.getResources().getString(R.string.app_name_short);
                     if (mChangedLAC) {
+                        system.out.println("print 13");
                         //Append changing LAC text
                         contentText = context.getString(R.string.hostile_service_area_changing_lac_detected);
                         tickerText += " - " + contentText;
@@ -1003,6 +1016,7 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
                         //    contentText = "CID: " + cellid + " is not providing a neighboring cell list!";
 
                     } else if (mCellIdNotInOpenDb) {
+                        system.out.println("print 14");
                         //Append Cell ID not existing in external db text
                         contentText = context.getString(R.string.cell_id_doesnt_exist_in_db);
                         tickerText += " - " + contentText;
@@ -1010,6 +1024,7 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
                     break;
 
                 case DANGER: // RED
+                    system.out.println("print 15");
                     tickerText = context.getResources().getString(R.string.app_name_short) + " - " + context.getString(R.string.alert_threat_detected); // Hmm, this is vague!
                     if (mTypeZeroSmsDetected) {
                         contentText = context.getString(R.string.alert_silent_sms_detected);
@@ -1017,6 +1032,7 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
 
                     break;
                 default:
+                    system.out.println("print 16");
                     tickerText = context.getResources().getString(R.string.main_app_name);
                     break;
             }
@@ -1118,6 +1134,7 @@ public class CellTracker implements SharedPreferences.OnSharedPreferenceChangeLi
      * Used in SmsDetector.java
      */
     public Cell getMonitorCell() {
+        system.out.println("print 17");
         return mMonitorCell;
     }
 
